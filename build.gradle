@@ -1,0 +1,81 @@
+group 'com.jetbrains.circlet'
+
+buildscript {
+    apply from: 'versions.gradle'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+        maven {
+            url "https://dl.bintray.com/shafirov/kwp"
+        }
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.moowork.gradle:gradle-node-plugin:0.13"
+        classpath "org.jetbrains.kwp:kwp:0.1.2"
+        classpath "de.undercouch:gradle-download-task:3.1.0"
+    }
+}
+
+apply plugin: 'java'
+
+allprojects {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+        maven {
+            url "http://dl.bintray.com/kotlinx/kotlinx"
+        }
+    }
+
+    apply plugin: 'kotlin2js'
+    apply plugin: KWP
+
+    dependencies {
+        compile "org.jetbrains.kotlin:kotlin-js-library:$kotlin_version"
+    }
+
+    def target = "${projectDir}/build/classes/main"
+    def projectName = name
+
+    compileKotlin2Js {
+        kotlinOptions.metaInfo = true
+        kotlinOptions.outputFile= "$target/${projectName}.js"
+        kotlinOptions.sourceMap=true
+    }
+
+    jar.dependsOn compileKotlin2Js
+}
+
+apply plugin: 'com.moowork.node'
+
+node {
+  download = true
+  workDir = file("${project.buildDir}/nodejs")
+  nodeModulesDir = file("${project.projectDir}")
+}
+
+task buildNpmDist(type: NpmTask, dependsOn: npm_install) {
+    args = ['run-script', 'build']
+}
+
+task buildDist(dependsOn: [buildNpmDist], type: Zip) {
+    from('dist') {
+        exclude '**/*.zip'
+    }
+
+    destinationDir = projectDir
+    archiveName="dist/cui-demo.zip"
+}
+/*
+npm_test.dependsOn buildJs
+buildNpmDist.dependsOn buildJs
+*/
+classes.dependsOn npm_install
+
+test.dependsOn npm_test
+assemble.dependsOn buildDist

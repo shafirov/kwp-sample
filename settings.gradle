@@ -1,0 +1,4 @@
+rootProject.name = 'kwp-sample'
+
+include 'showcase'
+include 'tests'
