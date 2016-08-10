@@ -1,4 +1,4 @@
-group 'com.jetbrains.circlet'
+group 'kwp-sample'
 
 buildscript {
     apply from: 'versions.gradle'

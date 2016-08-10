@@ -1,5 +1,5 @@
 {
-  "name": "circlet_ui",
+  "name": "kwp-sample",
   "private": true,
   "version": "0.0.1",
   "description": "Scaffolding example of webpack+gradle+kotlin stack",
