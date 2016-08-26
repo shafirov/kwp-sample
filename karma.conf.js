@@ -3,6 +3,8 @@ var webpackCfg = require('./webpack.config');
 // Set node environment to testing
 process.env.NODE_ENV = 'test';
 
+webpackCfg.kwp.project='tests'
+
 module.exports = function(config) {
   config.set({
     basePath: '',

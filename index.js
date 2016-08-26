@@ -1,1 +1,1 @@
-require('./build.gradle?showcase')
+require('showcase')

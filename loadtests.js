@@ -1,1 +1,1 @@
-require('./build.gradle?tests')
+require('tests')
