@@ -5,11 +5,9 @@ buildscript {
 
     repositories {
         mavenCentral()
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         jcenter()
-        maven {
-            url "https://dl.bintray.com/shafirov/kwp"
-        }
+        maven { url "https://dl.bintray.com/kotlin/kotlin-dev/" }
+        maven { url "https://dl.bintray.com/shafirov/kwp" }
         mavenLocal()
     }
 
@@ -26,11 +24,9 @@ apply plugin: 'java'
 allprojects {
     repositories {
         mavenCentral()
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         jcenter()
-        maven {
-            url "http://dl.bintray.com/kotlinx/kotlinx"
-        }
+        maven { url "https://dl.bintray.com/kotlin/kotlin-dev/" }
+        maven { url "https://dl.bintray.com/shafirov/kwp" }
         mavenLocal()
     }
 
