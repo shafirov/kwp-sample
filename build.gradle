@@ -45,6 +45,7 @@ allprojects {
         kotlinOptions.outputFile= "$target/${projectName}.js"
         kotlinOptions.sourceMap=true
         kotlinOptions.moduleKind='commonjs'
+        kotlinOptions.main='call'
     }
 
     jar.dependsOn compileKotlin2Js
